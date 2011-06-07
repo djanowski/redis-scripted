@@ -17,7 +17,7 @@ class should look for scripts:
 
     require "redis/scripted"
 
-    redis = Redis.connect(scripts_path: "./scripts")
+    redis = Redis::Scripted(scripts_path: "./scripts")
 
 The scripts are defined as instance methods for convenience:
 
