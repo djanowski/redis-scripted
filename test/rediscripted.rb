@@ -37,3 +37,17 @@ test "uses EVALSHA" do
 
   assert_equal Redis.new(port: 6399).client.call(:evalsha, "d76ce5687840f0436ae4c09c50564cf0e537395e", 2, "foo", "bar"), 1
 end
+
+test "EVALSHA" do
+  Redis.new(port: 6399).client.call(:eval, "return #KEYS", 1, "foo")
+
+  assert_equal redis.evalsha(Digest::SHA1.hexdigest("return #KEYS"), ["foo"]), 1
+end
+
+test "EVAL" do
+  redis.sadd("foo", "s1")
+  redis.sadd("foo", "s2")
+  redis.sadd("bar", "s1")
+
+  assert_equal redis.eval("return #KEYS", ["foo"]), 1
+end

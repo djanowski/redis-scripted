@@ -1,4 +1,4 @@
-`Redis::Scripted`
+Redis::Scripted
 ===
 
 A Ruby client that supports the experimental scripting feature in Redis.
@@ -27,8 +27,12 @@ Note that `msadd` receives two arguments at most: one array for the keys
 and another for the values. This is necessary because of [how `EVAL`
 works](http://antirez.com/post/scripting-branch-released.html).
 
+The class also exposes the `eval` and `evalsha` methods if you want to
+call them yourself.
+
 Acknowledgments
 ===
 
-Code was inspired by [mkrecny](https://github.com/mkrecny/redis-extend)
-and [catwell](https://github.com/catwell/redis-extend).
+Code was inspired by [mkrecny](https://github.com/mkrecny/redis-extend),
+[catwell](https://github.com/catwell/redis-extend) and
+[dsander](https://github.com/dsander/redis-rb/commit/e57d3a08eaef0f98e33cddea90ed317aad4d1f14).
