@@ -16,18 +16,22 @@ class Redis::Scripted < Redis
   end
 
   def evalsha(sha, keys = [], values = [])
-    synchronize do
-      @client.call(:evalsha, sha, keys.size, *keys, *values)
-    end
+    _call(:evalsha, sha, keys, values)
   end
 
   def eval(script, keys = [], values = [])
-    synchronize do
-      @client.call(:eval, script, keys.size, *keys, *values)
-    end
+    _call(:eval, script, keys, values)
   end
 
 private
+
+  def _call(method, arg, keys, values)
+    keys = Array(keys) unless keys.is_a?(Array)
+    values = Array(values) unless keys.is_a?(Array)
+    synchronize do
+      @client.call(method, arg, keys.size, *keys, *values)
+    end
+  end
 
   def _define_script_method(name, script)
     sha = Digest::SHA1.hexdigest(script)
