@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
     "Rakefile",
     "bin/*",
     "*.gemspec",
-    "test/*.*"
+    "test/*.*",
+    "lib/redis/*"
   ]
 end
